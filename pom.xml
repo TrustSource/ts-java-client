@@ -173,6 +173,26 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- ecs scan -->
+            <plugin>
+                <groupId>de.eacg</groupId>
+                <artifactId>ecs-mvn-plugin</artifactId>
+                <version>0.1.4</version>
+                <configuration>
+                    <credentials>~/.ecsrc.json</credentials>
+                    <projectName>ecs-mvn-plugin</projectName>
+                    <skipTransfer>false</skipTransfer>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>dependency-scan</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>dependency-scan</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
