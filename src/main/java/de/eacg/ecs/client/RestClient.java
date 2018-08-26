@@ -59,7 +59,6 @@ public class RestClient {
     }
 
     public String transferScan(Scan scan) throws Exception {
-
         Response response =
             client.target(baseUrl).path(apiPath).path("scans").
                     request(MediaType.APPLICATION_JSON_TYPE).
@@ -71,6 +70,28 @@ public class RestClient {
         responseStatus = response.getStatus();
         return response.readEntity(String.class);
     }
+
+
+    public CheckResults checkScan(Scan scan) throws Exception {
+        Response response =
+                client.target(baseUrl).path(apiPath).path("check_component").
+                        request(MediaType.APPLICATION_JSON_TYPE).
+                        header("User-Agent", this.userAgent).
+                        header("X-ApiKey", this.properties.getProperty("apiKey")).
+                        header("X-User", this.properties.getProperty("userName")).
+                        buildPost(Entity.json(Check.from(scan))).invoke();
+
+        responseStatus = response.getStatus();
+
+        if (responseStatus == 200) {
+            //System.out.print(response.readEntity(String.class));
+            return response.readEntity(CheckResults.class);
+        } else {
+            return null;
+        }
+
+    }
+
 
     public int getResponseStatus() {
         return responseStatus;
