@@ -36,6 +36,12 @@
             <organization>EACG, Enterprise Architecture Consulting Group GmbH</organization>
             <organizationUrl>https://www.eacg.de/</organizationUrl>
         </developer>
+        <developer>
+            <name>Grigory Markin</name>
+            <id>gmn</id>
+            <organization>EACG, Enterprise Architecture Consulting Group GmbH</organization>
+            <organizationUrl>https://www.eacg.de/</organizationUrl>
+        </developer>
     </developers>
 
     <properties>
@@ -51,7 +57,7 @@
 
     <profiles>
         <profile>
-            <id>release</id>
+            <id>sonatype-oss-release</id>
             <distributionManagement>
                 <snapshotRepository>
                     <id>ossrh</id>
