@@ -7,7 +7,18 @@
 TrustSource (https://www.trustsource.io) Java client. A java library to transfer dependency information to TrustSource-Server via its REST-API. There are several plugins available that use (wrap) this library to integrate with different build tools.
 
 Please see the following links for more details on the corresponding package manager: 
-* [![Maven](https://github.com/eacg-gmbh/ecs-mvn-plugin)]
+* [![Maven (Java)](https://github.com/eacg-gmbh/ecs-mvn-plugin)]
+* [![Gradle (Java)](https://github.com/eacg-gmbh/ecs-gradle-plugin)]
+* [![Kobalt (Java)](https://github.com/eacg-gmbh/TrustSource-Kobalt-Plugin)]
+* [![Node (JScript)](https://github.com/eacg-gmbh/ecs-node-client)]
+* [![Grunt (JScript)](https://github.com/eacg-gmbh/ecs-grunt-plugin)] could also be used for gulp ([see here] (https://support.trustsource.io/hc/en-us/articles/115003209085-How-to-integrate-TrustSource-with-npm-via-gulp))
+* [![PIP (Python)](https://github.com/eacg-gmbh/ecs-pip-plugin)]
+* [![Bundler (Ruby)](https://github.com/eacg-gmbh/ecs-bundler)]
+* [![Composer (PHP)](https://github.com/eacg-gmbh/ecs-composer)]
+* [![SPM (Swift)](https://github.com/eacg-gmbh/ecs-spm-plugin)]
+* [![nuget (.NET)](https://github.com/eacg-gmbh/ecs-nuget)]
+*
+* 
 
 
 
