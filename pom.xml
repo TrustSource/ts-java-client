@@ -5,7 +5,7 @@
 
     <groupId>de.eacg</groupId>
     <artifactId>ecs-java-client</artifactId>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
     <packaging>jar</packaging>
 
     <name>ecs-java-client</name>
@@ -57,7 +57,7 @@
 
     <profiles>
         <profile>
-            <id>sonatype-oss-release</id>
+            <id>release</id>
             <distributionManagement>
                 <snapshotRepository>
                     <id>ossrh</id>
@@ -148,7 +148,7 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>2.8.2</version>
                 <configuration>
-                    <skip>true</skip>
+<!--                     <skip>true</skip> -->
                 </configuration>
             </plugin>
             <!-- attach sources-->
@@ -185,8 +185,9 @@
                 <artifactId>ecs-mvn-plugin</artifactId>
                 <version>0.1.4</version>
                 <configuration>
+                    <skip>true</skip>
                     <credentials>~/.ecsrc.json</credentials>
-                    <projectName>ecs-mvn-plugin</projectName>
+                    <projectName>ecs-java-client</projectName>
                     <skipTransfer>false</skipTransfer>
                 </configuration>
                 <executions>

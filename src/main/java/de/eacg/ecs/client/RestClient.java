@@ -7,10 +7,19 @@
 
 package de.eacg.ecs.client;
 
-
+import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.AuthCache;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.impl.auth.BasicScheme;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.SystemDefaultRoutePlanner;
+import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.engines.ApacheHttpClient4Engine;
 
@@ -26,6 +35,7 @@ public class RestClient {
     private final String baseUrl;
     private final String apiPath;
     private final String userAgent;
+
     private final Client client;
     private final Properties properties;
 
@@ -36,7 +46,7 @@ public class RestClient {
 //    }
 
     public RestClient(Properties properties, String userAgent) {
-        this(properties, userAgent, createClient());
+        this(properties, userAgent, createClient(properties));
     }
 
 
@@ -97,14 +107,65 @@ public class RestClient {
         return responseStatus;
     }
 
-    private static Client createClient() {
-        SystemDefaultRoutePlanner routePlanner = new SystemDefaultRoutePlanner(
-                ProxySelector.getDefault());
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setRoutePlanner(routePlanner)
-                .build();
 
-        ApacheHttpClient4Engine engine = new ApacheHttpClient4Engine(httpClient);
+
+    private static Client createClient(Properties properties) {
+        String proxyUrl = properties.getProperty("proxyUrl", "");
+        String proxyPort = properties.getProperty("proxyPort", "8080");
+        String proxyUser = properties.getProperty("proxyUser", "");
+        String proxyPass = properties.getProperty("proxyPass", "");
+
+        ApacheHttpClient4Engine engine = null;
+
+        if (!proxyUrl.equals("")) {
+            HttpHost proxy = new HttpHost(proxyUrl, Integer.valueOf(proxyPort));
+            DefaultProxyRoutePlanner routePlanner = new DefaultProxyRoutePlanner(proxy);
+
+            CredentialsProvider credentialsProvider = null;
+            HttpClientContext context = null;
+
+            if(!proxyUser.equals("")) {
+                credentialsProvider = new BasicCredentialsProvider();
+                credentialsProvider.setCredentials(new AuthScope(proxy),
+                        new UsernamePasswordCredentials(proxyUser,  proxyPass));
+
+                AuthCache authCache = new BasicAuthCache();
+                BasicScheme basicAuth = new BasicScheme();
+
+                authCache.put(proxy, basicAuth);
+
+                context = HttpClientContext.create();
+                context.setCredentialsProvider(credentialsProvider);
+                context.setAuthCache(authCache);
+            }
+
+            if(credentialsProvider != null) {
+                CloseableHttpClient httpClient = HttpClients.custom()
+                        .setRoutePlanner(routePlanner)
+                        .setDefaultCredentialsProvider(credentialsProvider)
+                        .build();
+
+                engine = new ApacheHttpClient4Engine(httpClient, context);
+
+            } else {
+                CloseableHttpClient httpClient = HttpClients.custom()
+                        .setRoutePlanner(routePlanner)
+                        .build();
+
+                engine = new ApacheHttpClient4Engine(httpClient);
+            }
+
+        } else {
+            SystemDefaultRoutePlanner routePlanner =
+                    new SystemDefaultRoutePlanner(ProxySelector.getDefault());
+
+            CloseableHttpClient httpClient = HttpClients.custom()
+                    .setRoutePlanner(routePlanner)
+                    .build();
+
+            engine = new ApacheHttpClient4Engine(httpClient);
+
+        }
 
         return new ResteasyClientBuilder().httpEngine(engine).build();
     }

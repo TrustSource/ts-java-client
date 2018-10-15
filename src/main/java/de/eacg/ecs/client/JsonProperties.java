@@ -43,6 +43,11 @@ public class JsonProperties extends Properties {
     public static final String BASE_URL = "baseUrl";
     public static final String API_PATH = "apiPath";
 
+    public static final String PROXY_URL = "proxyUrl";
+    public static final String PROXY_PORT = "proxyPort";
+    public static final String PROXY_USER = "proxyUser";
+    public static final String PROXY_PASS = "proxyPass";
+
     private static final List<String> MANDATORY_KEYS = Arrays.asList(
         new String[] { USER_NAME, API_KEY, BASE_URL, API_PATH});
 
@@ -82,6 +87,22 @@ public class JsonProperties extends Properties {
 
     public void setApiPath(String apiPath) {
         setPropertyIfNotNull(API_PATH, apiPath);
+    }
+
+    public void setProxyUrl(String proxyUrl) {
+        setPropertyIfNotNull(PROXY_URL, proxyUrl);
+    }
+
+    public void setProxyPort(String proxyPort) {
+        setPropertyIfNotNull(PROXY_PORT, proxyPort);
+    }
+
+    public void setProxyUser(String proxyUser) {
+        setPropertyIfNotNull(PROXY_USER, proxyUser);
+    }
+
+    public void setProxyPass(String proxyPass) {
+        setPropertyIfNotNull(PROXY_PASS, proxyPass);
     }
 
     /**
