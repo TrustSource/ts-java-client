@@ -3,8 +3,9 @@
 [![MIT License](https://img.shields.io/npm/l/check-dependencies.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
 # TrustSource java-client
+TrustSource (https://www.trustsource.io) is a legal resolver and OpenChain compliant workflow engine that allows you to manage your open source dependencies, provide legal compliance and create bill of materials.
 
-TrustSource (https://www.trustsource.io) Java client is a java library to transfer dependency information to TrustSource-Server via its REST-API. There are several plugins available that use (wrap) this library to integrate with different build tools.
+TrustSource Java client is a java library to transfer dependency information to TrustSource-Server via its REST-API. There are several plugins available that use (wrap) this library to integrate with different build tools.
 
 Please see the following links for more details on the corresponding package manager: 
 * [Maven (Java)](https://github.com/eacg-gmbh/ecs-mvn-plugin)
@@ -18,4 +19,9 @@ Please see the following links for more details on the corresponding package man
 * [SPM (Swift)](https://github.com/eacg-gmbh/ecs-spm-plugin)
 * [nuget (.NET)](https://github.com/eacg-gmbh/ecs-nuget)
 
-TrustSource is a legal resolver and OpenChain compliant workflow engine that allows to manage your open source dependencies, provide legal compliance and create bill of materials.  
+# How to obtain a TrustSource API Key
+TrustSource provide a free version. You may tregister and select the egar wheel on the upper right side and select API keys from the menu. Then select API-Key and generate the key. Paste user & API key into your local settings file and run your scan. Be compliant ;-)
+
+# How to obtain Support
+Write us an email to support@trustsurce.io. We will be happy to hear from you. Or visit our knowledgebase at https://support.trustsource.io for more insights and tutorials.
+
