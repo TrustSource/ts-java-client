@@ -4,7 +4,7 @@
 
 # TrustSource java-client
 
-TrustSource (https://www.trustsource.io) Java client. A java library to transfer dependency information to TrustSource-Server via its REST-API. There are several plugins available that use (wrap) this library to integrate with different build tools.
+TrustSource (https://www.trustsource.io) Java client is a java library to transfer dependency information to TrustSource-Server via its REST-API. There are several plugins available that use (wrap) this library to integrate with different build tools.
 
 Please see the following links for more details on the corresponding package manager: 
 * [Maven (Java)](https://github.com/eacg-gmbh/ecs-mvn-plugin)
@@ -18,3 +18,4 @@ Please see the following links for more details on the corresponding package man
 * [SPM (Swift)](https://github.com/eacg-gmbh/ecs-spm-plugin)
 * [nuget (.NET)](https://github.com/eacg-gmbh/ecs-nuget)
 
+TrustSource is a legal resolver and OpenChain compliant workflow engine that allows to manage your open source dependencies, provide legal compliance and create bill of materials.  
