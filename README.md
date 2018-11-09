@@ -8,6 +8,7 @@ TrustSource (https://www.trustsource.io) is a legal resolver and OpenChain compl
 TrustSource Java client is a java library to transfer dependency information to TrustSource-Server via its REST-API. There are several plugins available that use (wrap) this library to integrate with different build tools.
 
 Please see the following links for more details on the corresponding package manager: 
+* [Ivy/Ant (Java)](https://github.com/eacg-gmbh/TrustSource-Ant-Plugin)
 * [Maven (Java)](https://github.com/eacg-gmbh/ecs-mvn-plugin)
 * [Gradle (Java)](https://github.com/eacg-gmbh/ecs-gradle-plugin)
 * [Kobalt (Java)](https://github.com/eacg-gmbh/TrustSource-Kobalt-Plugin)
