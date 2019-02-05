@@ -18,7 +18,7 @@ Please see the following links for more details on the corresponding package man
 * [Bundler (Ruby)](https://github.com/eacg-gmbh/ecs-bundler)
 * [Composer (PHP)](https://github.com/eacg-gmbh/ecs-composer)
 * [SPM (Swift)](https://github.com/eacg-gmbh/ecs-spm-plugin)
-* [nuget (.NET)](https://github.com/eacg-gmbh/ts-nuget)
+* [nuget (.NET)](https://github.com/eacg-gmbh/ts-dotnet)
 
 # How to obtain a TrustSource API Key
 TrustSource provide a free version. You may tregister and select the egar wheel on the upper right side and select API keys from the menu. Then select API-Key and generate the key. Paste user & API key into your local settings file and run your scan. Be compliant ;-)
