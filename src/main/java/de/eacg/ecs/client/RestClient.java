@@ -41,6 +41,13 @@ public class RestClient {
 
     private int responseStatus = -1;
 
+    public static class RestClientException extends Exception {
+        public RestClientException(String message) {
+            super(message);
+        }
+    }
+
+
 //    public RestClient(String baseUrl, String apiPath, Properties properties, String userAgent) {
 //        this(baseUrl, apiPath, properties, userAgent, createClient());
 //    }
@@ -82,7 +89,7 @@ public class RestClient {
     }
 
 
-    public CheckResults checkScan(Scan scan) throws Exception {
+    public CheckResults checkScan(Scan scan) throws RestClientException {
         Response response =
                 client.target(baseUrl).path(apiPath).path("check_component").
                         request(MediaType.APPLICATION_JSON_TYPE).
@@ -94,12 +101,13 @@ public class RestClient {
         responseStatus = response.getStatus();
 
         if (responseStatus == 200) {
-            //System.out.print(response.readEntity(String.class));
             return response.readEntity(CheckResults.class);
+        } else if (responseStatus >= 400 && responseStatus < 500) {
+            CheckError err = response.readEntity(CheckError.class);
+            throw new RestClientException(err.getError());
         } else {
-            return null;
+            throw new RestClientException("Calling Rest API failed with error code " + responseStatus);
         }
-
     }
 
 
