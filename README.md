@@ -20,6 +20,9 @@ Please see the following links for more details on the corresponding package man
 * [SPM (Swift)](https://github.com/eacg-gmbh/ecs-spm-plugin)
 * [nuget (.NET)](https://github.com/eacg-gmbh/ts-dotnet)
 
+# TrustSource and Continuous Integration
+There is a Jenkins Plugin, which can trigger most of the scanners listed above. You will find further information on this plugin at [Jenkins plugin](https://github.com/jenkinsci/ts-publisher-plugin) or directly on the [Jenkins Plugin Marketplace](https://plugins.jenkins.io/ecs-publisher). 
+
 # How to obtain a TrustSource API Key
 TrustSource provide a free version. You may tregister and select the egar wheel on the upper right side and select API keys from the menu. Then select API-Key and generate the key. Paste user & API key into your local settings file and run your scan. Be compliant ;-)
 
