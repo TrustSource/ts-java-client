@@ -15,17 +15,21 @@ public class Scan {
     private final String project;
     private final String module;
     private final String moduleId;
+    private final String branch;
+    private final String tag;
     private final List<Dependency> dependencies;
 
-    public Scan(String project, String module, String moduleId, List<Dependency> dependencies) {
-        this.dependencies = dependencies;
+    public Scan(String project, String module, String moduleId, String branch, String tag, List<Dependency> dependencies) {
         this.project = project;
         this.module = module;
         this.moduleId = moduleId;
+        this.branch = branch;
+        this.tag = tag;
+        this.dependencies = dependencies;
     }
 
-    public Scan(String project, String module, String moduleId, Dependency dependency) {
-        this(project, module, moduleId, Collections.singletonList(dependency));
+    public Scan(String project, String module, String moduleId, String branch, String tag, Dependency dependency) {
+        this(project, module, moduleId, branch, tag, Collections.singletonList(dependency));
     }
 
 
@@ -46,5 +50,11 @@ public class Scan {
         return moduleId;
     }
 
+    public String getBranch() {
+        return branch;
+    }
 
+    public String getTag() {
+        return tag;
+    }
 }

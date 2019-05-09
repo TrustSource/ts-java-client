@@ -42,7 +42,9 @@ public class RestClientTest {
     @Test
     public void transfer() throws Exception {
         Dependency.Builder db = new Dependency.Builder().setName("testDependency").setKey("test:key");
-        Scan scan = new Scan("test-project", "test-module", "test-module", Collections.singletonList(db.buildDependency()));
+        Scan scan = new Scan(
+                "test-project", "test-module", "test-module", "test-branch", "test-tag",
+                Collections.singletonList(db.buildDependency()));
 
         JsonProperties config = new JsonProperties((String)null);
         config.setBaseUrl("http://test.com");
