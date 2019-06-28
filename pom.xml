@@ -5,7 +5,7 @@
 
     <groupId>de.eacg</groupId>
     <artifactId>ecs-java-client</artifactId>
-    <version>0.2.3</version>
+    <version>0.3.0</version>
     <packaging>jar</packaging>
 
     <name>ecs-java-client</name>
@@ -45,14 +45,13 @@
     </developers>
 
     <properties>
-        <maven.compiler.target>1.7</maven.compiler.target>
-        <maven.compiler.source>1.7</maven.compiler.source>
         <maven.version>3.1.1</maven.version>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
-        <version.org.jboss.resteasy>3.0.14.Final</version.org.jboss.resteasy>
-        <version.org.apache.httpcomponents.httpclient>4.5.1</version.org.apache.httpcomponents.httpclient>
-        <version.org.apache.httpcomponents.httpcore>4.4.4</version.org.apache.httpcomponents.httpcore>
+        <version.org.jboss.resteasy>3.8.0.Final</version.org.jboss.resteasy>
+        <version.org.apache.httpcomponents.httpclient>4.5.9</version.org.apache.httpcomponents.httpclient>
+        <version.org.apache.httpcomponents.httpcore>4.4.11</version.org.apache.httpcomponents.httpcore>
+        <version.com.sun.xml.bind.jaxb>2.3.2</version.com.sun.xml.bind.jaxb>
     </properties>
 
     <profiles>
@@ -135,13 +134,33 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>1.10.8</version>
+            <version>2.23.4</version>
             <scope>test</scope>
         </dependency>
+        <!-- Java 11 compatibility deps -->
+<!--         <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${version.com.sun.xml.bind.jaxb}</version>            
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.2</version>            
+        </dependency> -->
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
+
             <!-- expose new plexus components -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -169,7 +188,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -178,12 +197,15 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration> 
+                    <source>8</source>
+                </configuration> 
             </plugin>
             <!-- ecs scan -->
             <plugin>
                 <groupId>de.eacg</groupId>
                 <artifactId>ecs-mvn-plugin</artifactId>
-                <version>0.1.4</version>
+                <version>0.2.0</version>
                 <configuration>
                     <skip>true</skip>
                     <credentials>~/.ecsrc.json</credentials>

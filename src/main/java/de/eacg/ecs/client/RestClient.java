@@ -20,8 +20,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.SystemDefaultRoutePlanner;
 import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
+import org.apache.http.protocol.HttpContext;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.engines.ApacheHttpClient4Engine;
+import org.jboss.resteasy.client.jaxrs.engines.HttpContextProvider;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
@@ -123,14 +125,14 @@ public class RestClient {
         String proxyUser = properties.getProperty("proxyUser", "");
         String proxyPass = properties.getProperty("proxyPass", "");
 
-        ApacheHttpClient4Engine engine = null;
+        ApacheHttpClient4Engine engine;
 
         if (!proxyUrl.equals("")) {
             HttpHost proxy = new HttpHost(proxyUrl, Integer.valueOf(proxyPort));
             DefaultProxyRoutePlanner routePlanner = new DefaultProxyRoutePlanner(proxy);
 
             CredentialsProvider credentialsProvider = null;
-            HttpClientContext context = null;
+            HttpContextProvider contextProvider = null;
 
             if(!proxyUser.equals("")) {
                 credentialsProvider = new BasicCredentialsProvider();
@@ -142,9 +144,11 @@ public class RestClient {
 
                 authCache.put(proxy, basicAuth);
 
-                context = HttpClientContext.create();
+                final HttpClientContext context = HttpClientContext.create();
                 context.setCredentialsProvider(credentialsProvider);
                 context.setAuthCache(authCache);
+
+                contextProvider = () -> context;
             }
 
             if(credentialsProvider != null) {
@@ -153,7 +157,7 @@ public class RestClient {
                         .setDefaultCredentialsProvider(credentialsProvider)
                         .build();
 
-                engine = new ApacheHttpClient4Engine(httpClient, context);
+                engine = new ApacheHttpClient4Engine(httpClient, contextProvider);
 
             } else {
                 CloseableHttpClient httpClient = HttpClients.custom()
