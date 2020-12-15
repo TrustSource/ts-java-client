@@ -38,7 +38,6 @@ import java.util.Properties;
  */
 public class JsonProperties extends Properties {
 
-    public static final String USER_NAME = "userName";
     public static final String API_KEY = "apiKey";
     public static final String BASE_URL = "baseUrl";
     public static final String API_PATH = "apiPath";
@@ -49,7 +48,7 @@ public class JsonProperties extends Properties {
     public static final String PROXY_PASS = "proxyPass";
 
     private static final List<String> MANDATORY_KEYS = Arrays.asList(
-        new String[] { USER_NAME, API_KEY, BASE_URL, API_PATH});
+        new String[] { API_KEY, BASE_URL, API_PATH});
 
     private final ObjectMapper mapper = new ObjectMapper();
 
@@ -71,10 +70,6 @@ public class JsonProperties extends Properties {
     public JsonProperties(InputStream is, Properties defaults) throws IOException {
         super(defaults);
         mapProperties(mapper.readValue(is, Map.class), "");
-    }
-
-    public void setUserName(String userName) {
-        setPropertyIfNotNull(USER_NAME, userName);
     }
 
     public void setApiKey(String apiKey) {

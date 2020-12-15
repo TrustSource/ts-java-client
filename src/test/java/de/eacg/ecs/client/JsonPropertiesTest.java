@@ -27,7 +27,6 @@ public class JsonPropertiesTest {
     @Before
     public void before() throws Exception {
         Properties defaults = new Properties();
-        defaults.setProperty("userName", "Otto");
         defaults.setProperty("apiKey", "12345");
         defaults.setProperty("baseUrl", "http://base");
         defaults.setProperty("apiPath", "/path");
@@ -55,7 +54,6 @@ public class JsonPropertiesTest {
 
     @Test
     public void get_without_defaults() throws Exception {
-        assertEquals("willy", properties.getProperty("userName"));
         assertEquals("12345678-12345678", properties.getProperty("apiKey"));
     }
 
@@ -67,13 +65,11 @@ public class JsonPropertiesTest {
 
     @Test
     public void empty_propeties_return_defaults() throws Exception {
-        assertEquals("Otto", emptyPropertiesWithDefaults.getProperty("userName"));
         assertEquals("12345", emptyPropertiesWithDefaults.getProperty("apiKey"));
         assertEquals("extraLarge", emptyPropertiesWithDefaults.getProperty("extra.large"));
     }
     @Test
     public void propeties_return_defaults_for_undefined() throws Exception {
-        assertEquals("willy", propertiesWithDefaults.getProperty("userName"));
         assertEquals("extraLarge", propertiesWithDefaults.getProperty("extra.large"));
     }
 
