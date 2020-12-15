@@ -74,6 +74,10 @@ public class CheckResults {
         private String name;
         private String description;
         private String status;
+        private String link;
+        private String cvssColor;
+        private String vector;
+        private String score;
 
         public Vulnerabilities() {}
 
@@ -89,6 +93,14 @@ public class CheckResults {
             return status;
         }
 
+        public String getLink() { return link; }
+
+        public String getCvssColor() { return cvssColor; }
+
+        public String getVector() { return vector; }
+
+        public String getScore() { return score; }
+
         public boolean isWarning() {
             return status.equals("warnings");
         }
@@ -99,12 +111,19 @@ public class CheckResults {
     }
 
     public static class LegalAnalysis {
+        private String reason;
+        private ComputedStatus computedStatus;
+
         private List<Obligation> obligations;
         private List<Violation> violations;
-        private ComputedStatus computedStatus;
 
         public LegalAnalysis(){
             this.obligations = new ArrayList<>();
+        }
+
+        public String getReason() { return reason; }
+        public ComputedStatus getComputedStatus() {
+            return computedStatus;
         }
 
         public List<Obligation> getObligations() {
@@ -113,10 +132,6 @@ public class CheckResults {
 
         public List<Violation> getViolations() {
             return violations;
-        }
-
-        public ComputedStatus getComputedStatus() {
-            return computedStatus;
         }
     }
 
