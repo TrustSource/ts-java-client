@@ -81,7 +81,6 @@ public class RestClient {
                     request(MediaType.APPLICATION_JSON_TYPE).
                     header("User-Agent", this.userAgent).
                     header("X-ApiKey", this.properties.getProperty("apiKey")).
-                    header("X-User", this.properties.getProperty("userName")).
                     buildPost(Entity.json(scan)).invoke();
 
         responseStatus = response.getStatus();
@@ -95,7 +94,6 @@ public class RestClient {
                         request(MediaType.APPLICATION_JSON_TYPE).
                         header("User-Agent", this.userAgent).
                         header("X-ApiKey", this.properties.getProperty("apiKey")).
-                        header("X-User", this.properties.getProperty("userName")).
                         buildPost(Entity.json(Check.from(scan))).invoke();
 
         responseStatus = response.getStatus();

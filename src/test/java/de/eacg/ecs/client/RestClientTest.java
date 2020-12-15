@@ -50,7 +50,6 @@ public class RestClientTest {
         config.setBaseUrl("http://test.com");
         config.setApiPath("api/v1.0/");
         config.setApiKey("12345");
-        config.setUserName("John Smith");
         RestClient ecsClient = new RestClient(config, "userAgent", client);
 
         Mockito.when(client.target("http://test.com")).thenReturn(webTarget);
