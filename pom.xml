@@ -48,7 +48,7 @@
         <maven.version>3.1.1</maven.version>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
-        <version.org.jboss.resteasy>3.8.0.Final</version.org.jboss.resteasy>
+        <version.org.jboss.resteasy>3.14.0.Final</version.org.jboss.resteasy>
         <version.org.apache.httpcomponents.httpclient>4.5.9</version.org.apache.httpcomponents.httpclient>
         <version.org.apache.httpcomponents.httpcore>4.4.11</version.org.apache.httpcomponents.httpcore>
         <version.com.sun.xml.bind.jaxb>2.3.2</version.com.sun.xml.bind.jaxb>
