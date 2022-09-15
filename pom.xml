@@ -5,7 +5,7 @@
 
     <groupId>de.eacg</groupId>
     <artifactId>ecs-java-client</artifactId>
-    <version>0.3.2</version>
+    <version>0.4.0</version>
     <packaging>jar</packaging>
 
     <name>ecs-java-client</name>
@@ -48,9 +48,9 @@
         <maven.version>3.1.1</maven.version>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
-        <version.org.jboss.resteasy>3.8.0.Final</version.org.jboss.resteasy>
-        <version.org.apache.httpcomponents.httpclient>4.5.9</version.org.apache.httpcomponents.httpclient>
-        <version.org.apache.httpcomponents.httpcore>4.4.11</version.org.apache.httpcomponents.httpcore>
+        <version.org.jboss.resteasy>4.7.7.Final</version.org.jboss.resteasy>
+        <version.org.apache.httpcomponents.httpclient>4.5.13</version.org.apache.httpcomponents.httpclient>
+        <version.org.apache.httpcomponents.httpcore>4.4.15</version.org.apache.httpcomponents.httpcore>
         <version.com.sun.xml.bind.jaxb>2.3.2</version.com.sun.xml.bind.jaxb>
     </properties>
 
@@ -102,7 +102,7 @@
     <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
+            <artifactId>resteasy-core</artifactId>
             <version>${version.org.jboss.resteasy}</version>
         </dependency>
         <dependency>
@@ -112,7 +112,7 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson-provider</artifactId>
+            <artifactId>resteasy-jackson2-provider</artifactId>
             <version>${version.org.jboss.resteasy}</version>
         </dependency>
         <dependency>
@@ -128,13 +128,13 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.23.4</version>
+            <version>4.8.0</version>
             <scope>test</scope>
         </dependency>
         <!-- Java 11 compatibility deps -->
@@ -170,6 +170,7 @@
 <!--                     <skip>true</skip> -->
                 </configuration>
             </plugin>
+
             <!-- attach sources-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -184,6 +185,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <!-- create javadoc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -197,21 +199,20 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration> 
-                    <source>8</source>
-                </configuration> 
             </plugin>
-            <!-- ecs scan -->
+
+            <!-- TS scan -->
             <plugin>
                 <groupId>de.eacg</groupId>
                 <artifactId>ecs-mvn-plugin</artifactId>
-                <version>0.2.1</version>
+                <version>0.2.3</version>
                 <configuration>
                     <skip>true</skip>
-                    <credentials>~/.ecsrc.json</credentials>
-                    <projectName>ecs-java-client</projectName>
+                    <credentials>../ts-settings.dev.json</credentials>
+                    <projectName>TrustSource</projectName>
                     <skipTransfer>false</skipTransfer>
                 </configuration>
+
                 <executions>
                     <execution>
                         <id>dependency-scan</id>
@@ -220,6 +221,18 @@
                             <goal>dependency-scan</goal>
                         </goals>
                     </execution>
+
+                    <execution>
+                        <id>dependency-check</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>dependency-check</goal>
+                        </goals>
+                        <configuration>
+                            <allowBreakBuild>false</allowBreakBuild>
+                        </configuration>
+                    </execution>
+
                 </executions>
             </plugin>
         </plugins>

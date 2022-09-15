@@ -7,6 +7,7 @@
 
 package de.eacg.ecs.client;
 
+
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -20,17 +21,22 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.SystemDefaultRoutePlanner;
 import org.apache.http.impl.conn.DefaultProxyRoutePlanner;
-import org.apache.http.protocol.HttpContext;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.engines.ApacheHttpClient4Engine;
+
+import org.jboss.resteasy.client.jaxrs.engines.ApacheHttpClient43Engine;
 import org.jboss.resteasy.client.jaxrs.engines.HttpContextProvider;
+import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
+
+import java.net.ProxySelector;
+import java.util.Properties;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.ProxySelector;
-import java.util.Properties;
+
+//import javax.validation.constraints.NotNull;
+
+
 
 public class RestClient {
 
@@ -91,12 +97,13 @@ public class RestClient {
 
 
     public CheckResults checkScan(Scan scan) throws RestClientException {
-        Response response =
+        var check = Check.from(scan);
+        var response =
                 client.target(baseUrl).path(apiPath).path("check_component").
                         request(MediaType.APPLICATION_JSON_TYPE).
                         header("User-Agent", this.userAgent).
                         header("X-ApiKey", this.properties.getProperty("apiKey")).
-                        buildPost(Entity.json(Check.from(scan))).invoke();
+                        buildPost(Entity.json(check)).invoke();
 
         responseStatus = response.getStatus();
 
@@ -123,10 +130,10 @@ public class RestClient {
         String proxyUser = properties.getProperty("proxyUser", "");
         String proxyPass = properties.getProperty("proxyPass", "");
 
-        ApacheHttpClient4Engine engine;
+        ApacheHttpClient43Engine engine;
 
         if (!proxyUrl.equals("")) {
-            HttpHost proxy = new HttpHost(proxyUrl, Integer.valueOf(proxyPort));
+            HttpHost proxy = new HttpHost(proxyUrl, Integer.parseInt(proxyPort));
             DefaultProxyRoutePlanner routePlanner = new DefaultProxyRoutePlanner(proxy);
 
             CredentialsProvider credentialsProvider = null;
@@ -155,14 +162,14 @@ public class RestClient {
                         .setDefaultCredentialsProvider(credentialsProvider)
                         .build();
 
-                engine = new ApacheHttpClient4Engine(httpClient, contextProvider);
+                engine = new ApacheHttpClient43Engine(httpClient, contextProvider);
 
             } else {
                 CloseableHttpClient httpClient = HttpClients.custom()
                         .setRoutePlanner(routePlanner)
                         .build();
 
-                engine = new ApacheHttpClient4Engine(httpClient);
+                engine = new ApacheHttpClient43Engine(httpClient);
             }
 
         } else {
@@ -173,10 +180,10 @@ public class RestClient {
                     .setRoutePlanner(routePlanner)
                     .build();
 
-            engine = new ApacheHttpClient4Engine(httpClient);
+            engine = new ApacheHttpClient43Engine(httpClient);
 
         }
 
-        return new ResteasyClientBuilder().httpEngine(engine).build();
+        return new ResteasyClientBuilderImpl().httpEngine(engine).build();
     }
 }

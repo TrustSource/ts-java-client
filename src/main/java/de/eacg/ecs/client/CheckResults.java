@@ -115,10 +115,16 @@ public class CheckResults {
         private ComputedStatus computedStatus;
 
         private List<Obligation> obligations;
+
         private List<Violation> violations;
+
+        private String resolvedObligations;
+
+        private String resolvedViolations;
 
         public LegalAnalysis(){
             this.obligations = new ArrayList<>();
+            this.violations = new ArrayList<>();
         }
 
         public String getReason() { return reason; }
@@ -132,6 +138,14 @@ public class CheckResults {
 
         public List<Violation> getViolations() {
             return violations;
+        }
+
+        public String getResolvedObligations() {
+            return resolvedObligations;
+        }
+
+        public String getResolvedViolations() {
+            return resolvedViolations;
         }
     }
 
