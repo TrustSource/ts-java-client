@@ -7,19 +7,22 @@
 
 package de.eacg.ecs.client;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mockito;
-
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.Collections;
 
+import org.junit.Before;
+import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+
+import org.mockito.Mockito;
+
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.client.Invocation;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+
+
 
 public class RestClientTest {
 
@@ -48,13 +51,14 @@ public class RestClientTest {
 
         JsonProperties config = new JsonProperties((String)null);
         config.setBaseUrl("http://test.com");
-        config.setApiPath("api/v1.0/");
+        config.setApiPath("api/v2.0/");
         config.setApiKey("12345");
+
         RestClient ecsClient = new RestClient(config, "userAgent", client);
 
         Mockito.when(client.target("http://test.com")).thenReturn(webTarget);
-        Mockito.when(webTarget.path("api/v1.0/")).thenReturn(webTarget);
-        Mockito.when(webTarget.path("scans")).thenReturn(webTarget);
+        Mockito.when(webTarget.path("api/v2.0/")).thenReturn(webTarget);
+        Mockito.when(webTarget.path("core/scans")).thenReturn(webTarget);
         Mockito.when(webTarget.request(MediaType.APPLICATION_JSON_TYPE)).thenReturn(builder);
         Mockito.when(builder.header("User-Agent", "userAgent")).thenReturn(builder);
         Mockito.when(builder.header("X-ApiKey", "12345")).thenReturn(builder);

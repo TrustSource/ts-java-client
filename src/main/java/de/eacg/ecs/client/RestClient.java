@@ -29,13 +29,10 @@ import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
 import java.net.ProxySelector;
 import java.util.Properties;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-//import javax.validation.constraints.NotNull;
-
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 
 public class RestClient {
@@ -55,10 +52,6 @@ public class RestClient {
         }
     }
 
-
-//    public RestClient(String baseUrl, String apiPath, Properties properties, String userAgent) {
-//        this(baseUrl, apiPath, properties, userAgent, createClient());
-//    }
 
     public RestClient(Properties properties, String userAgent) {
         this(properties, userAgent, createClient(properties));
@@ -85,7 +78,7 @@ public class RestClient {
 
     public String transferScan(Scan scan) throws Exception {
         Response response =
-            client.target(baseUrl).path(apiPath).path("scans").
+            client.target(baseUrl).path(apiPath).path("core/scans").
                     request(MediaType.APPLICATION_JSON_TYPE).
                     header("User-Agent", this.userAgent).
                     header("X-ApiKey", this.properties.getProperty("apiKey")).
@@ -99,7 +92,7 @@ public class RestClient {
     public CheckResults checkScan(Scan scan) throws RestClientException {
         var check = Check.from(scan);
         var response =
-                client.target(baseUrl).path(apiPath).path("check_component").
+                client.target(baseUrl).path(apiPath).path("complience/check/component").
                         request(MediaType.APPLICATION_JSON_TYPE).
                         header("User-Agent", this.userAgent).
                         header("X-ApiKey", this.properties.getProperty("apiKey")).
@@ -132,14 +125,14 @@ public class RestClient {
 
         ApacheHttpClient43Engine engine;
 
-        if (!proxyUrl.equals("")) {
+        if (!proxyUrl.isEmpty()) {
             HttpHost proxy = new HttpHost(proxyUrl, Integer.parseInt(proxyPort));
             DefaultProxyRoutePlanner routePlanner = new DefaultProxyRoutePlanner(proxy);
 
             CredentialsProvider credentialsProvider = null;
             HttpContextProvider contextProvider = null;
 
-            if(!proxyUser.equals("")) {
+            if(!proxyUser.isEmpty()) {
                 credentialsProvider = new BasicCredentialsProvider();
                 credentialsProvider.setCredentials(new AuthScope(proxy),
                         new UsernamePasswordCredentials(proxyUser,  proxyPass));
