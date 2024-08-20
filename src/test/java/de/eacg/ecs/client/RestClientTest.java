@@ -51,17 +51,17 @@ public class RestClientTest {
 
         JsonProperties config = new JsonProperties((String)null);
         config.setBaseUrl("http://test.com");
-        config.setApiPath("api/v2.0/");
+        config.setApiPath("v2/");
         config.setApiKey("12345");
 
         RestClient ecsClient = new RestClient(config, "userAgent", client);
 
         Mockito.when(client.target("http://test.com")).thenReturn(webTarget);
-        Mockito.when(webTarget.path("api/v2.0/")).thenReturn(webTarget);
+        Mockito.when(webTarget.path("v2/")).thenReturn(webTarget);
         Mockito.when(webTarget.path("core/scans")).thenReturn(webTarget);
         Mockito.when(webTarget.request(MediaType.APPLICATION_JSON_TYPE)).thenReturn(builder);
-        Mockito.when(builder.header("User-Agent", "userAgent")).thenReturn(builder);
-        Mockito.when(builder.header("X-ApiKey", "12345")).thenReturn(builder);
+        Mockito.when(builder.header("user-agent", "userAgent")).thenReturn(builder);
+        Mockito.when(builder.header("x-api-key", "12345")).thenReturn(builder);
         Mockito.when(builder.header("X-User", "John Smith")).thenReturn(builder);
         Mockito.when(builder.buildPost(Mockito.any(Entity.class))).thenReturn(invocation);
         Mockito.when(invocation.invoke()).thenReturn(response);

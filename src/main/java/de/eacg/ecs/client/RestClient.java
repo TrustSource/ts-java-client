@@ -80,8 +80,8 @@ public class RestClient {
         Response response =
             client.target(baseUrl).path(apiPath).path("core/scans").
                     request(MediaType.APPLICATION_JSON_TYPE).
-                    header("User-Agent", this.userAgent).
-                    header("X-ApiKey", this.properties.getProperty("apiKey")).
+                    header("user-agent", this.userAgent).
+                    header("x-api-key", this.properties.getProperty("apiKey")).
                     buildPost(Entity.json(scan)).invoke();
 
         responseStatus = response.getStatus();
@@ -94,8 +94,8 @@ public class RestClient {
         var response =
                 client.target(baseUrl).path(apiPath).path("complience/check/component").
                         request(MediaType.APPLICATION_JSON_TYPE).
-                        header("User-Agent", this.userAgent).
-                        header("X-ApiKey", this.properties.getProperty("apiKey")).
+                        header("user-agent", this.userAgent).
+                        header("x-api-key", this.properties.getProperty("apiKey")).
                         buildPost(Entity.json(check)).invoke();
 
         responseStatus = response.getStatus();
