@@ -104,7 +104,7 @@ public class RestClient {
             return response.readEntity(CheckResults.class);
         } else if (responseStatus >= 400 && responseStatus < 500) {
             CheckError err = response.readEntity(CheckError.class);
-            throw new RestClientException(err.getError());
+            throw new RestClientException(err.getMessage());
         } else {
             throw new RestClientException("Calling Rest API failed with error code " + responseStatus);
         }

@@ -5,7 +5,7 @@
 
     <groupId>de.eacg</groupId>
     <artifactId>ecs-java-client</artifactId>
-    <version>0.4.1</version>
+    <version>0.4.2</version>
     <packaging>jar</packaging>
 
     <name>ecs-java-client</name>
@@ -86,7 +86,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.3</version>
+                        <version>1.6.14</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
@@ -205,12 +205,11 @@
             <plugin>
                 <groupId>de.eacg</groupId>
                 <artifactId>ecs-mvn-plugin</artifactId>
-                <version>0.2.3</version>
+                <version>0.2.4</version>
                 <configuration>
-                    <skip>true</skip>
                     <credentials>../ts-settings.dev.json</credentials>
                     <projectName>TrustSource</projectName>
-                    <skipTransfer>false</skipTransfer>
+                    <skipTransfer>true</skipTransfer>
                 </configuration>
 
                 <executions>
@@ -221,18 +220,16 @@
                             <goal>dependency-scan</goal>
                         </goals>
                     </execution>
-
-                    <execution>
+<!--                    <execution>
                         <id>dependency-check</id>
-                        <phase>install</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>dependency-check</goal>
                         </goals>
                         <configuration>
                             <allowBreakBuild>false</allowBreakBuild>
                         </configuration>
-                    </execution>
-
+                    </execution>-->
                 </executions>
             </plugin>
         </plugins>
