@@ -92,7 +92,7 @@ public class RestClient {
     public CheckResults checkScan(Scan scan) throws RestClientException {
         var check = Check.from(scan);
         var response =
-                client.target(baseUrl).path(apiPath).path("complience/check/component").
+                client.target(baseUrl).path(apiPath).path("compliance/check/component").
                         request(MediaType.APPLICATION_JSON_TYPE).
                         header("user-agent", this.userAgent).
                         header("x-api-key", this.properties.getProperty("apiKey")).
@@ -104,7 +104,11 @@ public class RestClient {
             return response.readEntity(CheckResults.class);
         } else if (responseStatus >= 400 && responseStatus < 500) {
             CheckError err = response.readEntity(CheckError.class);
-            throw new RestClientException(err.getMessage());
+            var msg = err.getMessage();
+            if (msg == null) {
+                msg = err.getError();
+            }
+            throw new RestClientException(msg);
         } else {
             throw new RestClientException("Calling Rest API failed with error code " + responseStatus);
         }

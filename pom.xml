@@ -5,7 +5,7 @@
 
     <groupId>de.eacg</groupId>
     <artifactId>ecs-java-client</artifactId>
-    <version>0.4.2</version>
+    <version>0.4.4</version>
     <packaging>jar</packaging>
 
     <name>ecs-java-client</name>
@@ -205,7 +205,7 @@
             <plugin>
                 <groupId>de.eacg</groupId>
                 <artifactId>ecs-mvn-plugin</artifactId>
-                <version>0.2.4</version>
+                <version>0.2.7</version>
                 <configuration>
                     <credentials>../ts-settings.dev.json</credentials>
                     <projectName>TrustSource</projectName>
