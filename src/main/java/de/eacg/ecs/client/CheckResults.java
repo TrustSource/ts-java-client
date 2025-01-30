@@ -1,10 +1,14 @@
 package de.eacg.ecs.client;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CheckResults {
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Warning {
         private String component;
         private String version;
@@ -37,6 +41,7 @@ public class CheckResults {
         }
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Result {
         private Component component;
         private String license;
@@ -69,15 +74,13 @@ public class CheckResults {
         }
     }
 
-
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Vulnerabilities {
         private String name;
-        private String description;
         private String status;
-        private String link;
         private String cvssColor;
-        private String vector;
         private String score;
+        private String link;
 
         public Vulnerabilities() {}
 
@@ -85,21 +88,15 @@ public class CheckResults {
             return name;
         }
 
-        public String getDescription() {
-            return description;
-        }
-
         public String getStatus() {
             return status;
         }
 
-        public String getLink() { return link; }
-
         public String getCvssColor() { return cvssColor; }
 
-        public String getVector() { return vector; }
-
         public String getScore() { return score; }
+
+        public String getLink() { return link; }
 
         public boolean isWarning() {
             return status.equals("warnings");
@@ -108,15 +105,20 @@ public class CheckResults {
         public boolean isViolation() {
             return status.equals("violations");
         }
+
+        public boolean isWhitelisted() {
+            return status.equals("whitelisted");
+        }
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class LegalAnalysis {
         private String reason;
         private ComputedStatus computedStatus;
 
-        private List<Obligation> obligations;
+        private final List<Obligation> obligations;
 
-        private List<Violation> violations;
+        private final List<Violation> violations;
 
         private String resolvedObligations;
 
@@ -149,6 +151,7 @@ public class CheckResults {
         }
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Obligation {
         private String type;
         private String message;
@@ -166,6 +169,7 @@ public class CheckResults {
 
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Violation {
         private String type;
         private String message;
@@ -190,6 +194,7 @@ public class CheckResults {
         }
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class ComputedStatus {
         private Boolean requireWhitelist;
         private String status;
