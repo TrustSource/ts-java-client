@@ -5,9 +5,9 @@
 # TrustSource java-client
 TrustSource (https://www.trustsource.io) is a legal resolver and OpenChain compliant workflow engine that allows you to manage your open source dependencies, provide legal compliance and create bill of materials.
 
-[!WARNING]
-PLEASE NOTE!
-We stopped further development on this client. Since Q4/2024 we decided to focus all efforts on developing [ts-scan](https://github.com/trustsource/ts-scan), which covers all capabilities of this solution as well. It will be further maintained and updated. This solution will only receive bug fixes. 
+> [!WARNING]
+> PLEASE NOTE!
+> We stopped further development on this client. Since Q4/2024 we decided to focus all efforts on developing [ts-scan](https://github.com/trustsource/ts-scan), which covers all capabilities of this solution as well. It will be further maintained and updated. This solution will only receive bug fixes. 
 
 TrustSource Java client is a java library to transfer dependency information to TrustSource-Server via its REST-API. There are several plugins available that use (wrap) this library to integrate with different build tools:
 
